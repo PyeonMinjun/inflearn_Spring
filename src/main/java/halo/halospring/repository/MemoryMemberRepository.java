@@ -1,6 +1,7 @@
 package halo.halospring.repository;
 
 import halo.halospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 

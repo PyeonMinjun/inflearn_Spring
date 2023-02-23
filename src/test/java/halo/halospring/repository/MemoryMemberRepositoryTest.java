@@ -17,7 +17,6 @@ class MemoryMemberRepositoryTest {
     @AfterEach
     public void afterEach() {   //메서드가 실행되고 끝날때마다 동작하게 됨 , 콜백 메소드
         repository.clearStore();
-
     }
 
     @Test
