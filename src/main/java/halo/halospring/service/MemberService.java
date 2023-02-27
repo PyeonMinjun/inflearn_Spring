@@ -5,10 +5,12 @@ import halo.halospring.repository.MemberRepository;
 import halo.halospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberService {
 
 
@@ -22,13 +24,16 @@ public class MemberService {
         회원가입
      */
     public Long join(Member member){
-        //같은 이름이 있는 중복 회원X
-        validateDuplicateMember(member); // 중복 회원검증
 
-        memberRepository.save(member); // 회원가입은간단하다 save에다가 member을 넣어주기만하면 된다
-        return member.getId();
 
-    }
+            //같은 이름이 있는 중복 회원X
+            validateDuplicateMember(member); // 중복 회원검증
+
+            memberRepository.save(member); // 회원가입은간단하다 save에다가 member을 넣어주기만하면 된다
+            return member.getId();
+
+        }
+
 
     private void validateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
