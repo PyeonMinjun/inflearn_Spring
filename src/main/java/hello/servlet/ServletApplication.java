@@ -1,8 +1,10 @@
 package hello.servlet;
 
+import hello.servlet.basic.web.springmvc.v1.SprintMemberFormControllerV1;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 
 @ServletComponentScan // 서블릿 자동 등록
 @SpringBootApplication
@@ -12,4 +14,9 @@ public class ServletApplication {
 		SpringApplication.run(ServletApplication.class, args);
 	}
 
+//
+//	@Bean
+//	SprintMemberFormControllerV1 sprintMemberFormControllerV1() {
+//		return new SprintMemberFormControllerV1();
+//	}
 }
