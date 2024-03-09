@@ -5,19 +5,19 @@ import lombok.Data;
 @Data
 public class Item {
 
-    private Long itemId;
-    private String itemName;
-    private Integer itemPrice;
-    private Integer Quantity;
+    private Long id;
+    private String name;
+    private Integer price;
+    private Integer quantity;
 
 
-    private Item() {
+    public Item() {
     }
 
-    public Item(String itemName, Integer itemPrice, Integer Quantity) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.Quantity = Quantity;
+    public Item(String itemName, Integer itemPrice, Integer quantity) {
+        this.name = itemName;
+        this.price = itemPrice;
+        this.quantity = quantity;
     }
 
 }
