@@ -6,7 +6,7 @@ import lombok.Data;
 public class Item {
 
     private Long id;
-    private String name;
+    private String itemName;
     private Integer price;
     private Integer quantity;
 
@@ -14,9 +14,9 @@ public class Item {
     public Item() {
     }
 
-    public Item(String itemName, Integer itemPrice, Integer quantity) {
-        this.name = itemName;
-        this.price = itemPrice;
+    public Item(String itemName, Integer price, Integer quantity) {
+        this.itemName = itemName;
+        this.price = price;
         this.quantity = quantity;
     }
 
