@@ -38,7 +38,7 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
-    //    -----------------------------------------------------------상품등록처리
+    //    -----------------------------------------------------------상품등록처리 시작
     //    @PostMapping("/add")       // 상품 등록 처리
     public String addItemV1(@RequestParam String itemName,
                             @RequestParam Integer price,
@@ -55,7 +55,7 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV2(@ModelAttribute("item") Item item, Model model) {
         itemRepository.save(item);
         model.addAttribute("item", item); // 자동 추가, 생략가능
@@ -75,9 +75,16 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    //    -----------------------------------------------------------상품등록처리
-//
-//
+
+    @PostMapping("/add")
+    public String addItemV5(Item item) {
+        itemRepository.save(item);
+        return "redirect:basic/items" + item.getId();
+    }
+
+
+    //    -----------------------------------------------------------상품등록처리 끝
+
     //수정 폼
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
