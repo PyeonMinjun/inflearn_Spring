@@ -4,6 +4,8 @@ package jpabook.jpabook.jpashop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 @Entity
 public class Delivery {
 
@@ -11,7 +13,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
     @Embedded
@@ -21,4 +23,6 @@ public class Delivery {
     private DeliveryStatus status; //ready comp
 
 
+    public Delivery() {
+    }
 }
