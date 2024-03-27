@@ -4,6 +4,8 @@ package jpabook.jpabook.jpashop.api;
 import jakarta.validation.Valid;
 import jpabook.jpabook.jpashop.domain.Address;
 import jpabook.jpabook.jpashop.domain.Member;
+import jpabook.jpabook.jpashop.dto.response.MemberDto;
+import jpabook.jpabook.jpashop.dto.response.Result;
 import jpabook.jpabook.jpashop.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,18 +55,8 @@ public class HelloApiController {
 
         return new Result(collect.size(),collect);
     }
-    @Data
-    @AllArgsConstructor
-    static class Result<T>{
-        private int count;
-        private T data;
-    }
 
-    @Data
-    @AllArgsConstructor
-    static class MemberDto {
-        private String name;
-    }
+
 
 
 
