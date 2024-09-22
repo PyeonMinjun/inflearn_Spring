@@ -2,6 +2,7 @@ package hello.jdbc.service;
 
 
 import hello.jdbc.domain.Member;
+import hello.jdbc.repository.MemberRepositoryV1;
 import hello.jdbc.repository.MemberRepositoryV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,6 @@ public class MemberServiceV2 {
         try {
             con.setAutoCommit(false);
             bizlogic(con, fromId, toId, money);
-            con.commit();
-
         } catch (Exception e) {
             con.rollback();
             throw new IllegalStateException(e);
@@ -47,14 +46,14 @@ public class MemberServiceV2 {
         }
     }
 
-    private void bizlogic(Connection con, String fromId, String toId, int money) throws SQLException {
+    private void bizlogic(Connection con,  String fromId, String toId, int money) throws SQLException {
         Member fromMember = memberRepository.findById(con,fromId);
         Member toMember = memberRepository.findById(con,toId);
 
 
-        memberRepository.update(con, fromId, fromMember.getMoney() - money);
+        memberRepository.update(con,fromId, fromMember.getMoney() - money);
         validation(toMember);
-        memberRepository.update(con, toId, toMember.getMoney() + money);
+        memberRepository.update(toId, toMember.getMoney() + money);
     }
 
     private void validation(Member toMember) {
