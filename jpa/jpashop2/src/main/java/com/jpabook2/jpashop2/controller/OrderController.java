@@ -25,6 +25,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    /** 상품 주문 **/
 
     @GetMapping("/order")
     public String orderForm(Model model) {
@@ -48,6 +49,7 @@ public class OrderController {
         return "redirect:/orders";
 
     }
+    /** 주문목록검색 **/
 
     @GetMapping("/orders")
     public String orders(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
@@ -56,6 +58,8 @@ public class OrderController {
 
         return "/order/orderList";
     }
+
+    /** 주문 취소 **/
 
     @PostMapping("orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId) {

@@ -39,6 +39,10 @@ public class ItemController {
         return "redirect:/items";
     }
 
+    /**
+     * 상품 목록
+     *
+     */
 
     @GetMapping("/items")
     public String list(Model model) {
