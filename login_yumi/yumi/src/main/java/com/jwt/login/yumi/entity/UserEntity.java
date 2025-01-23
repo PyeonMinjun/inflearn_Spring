@@ -1,4 +1,4 @@
-package com.jwt.login.yumi;
+package com.jwt.login.yumi.entity;
 
 
 import jakarta.persistence.Entity;

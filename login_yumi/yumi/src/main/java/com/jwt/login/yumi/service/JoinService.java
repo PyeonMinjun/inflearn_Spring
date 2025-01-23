@@ -1,11 +1,10 @@
 package com.jwt.login.yumi.service;
 
-import com.jwt.login.yumi.UserEntity;
+import com.jwt.login.yumi.entity.UserEntity;
 import com.jwt.login.yumi.dto.joinDTO;
 import com.jwt.login.yumi.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Service
