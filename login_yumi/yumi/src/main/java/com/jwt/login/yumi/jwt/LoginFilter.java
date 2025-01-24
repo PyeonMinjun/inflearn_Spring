@@ -29,8 +29,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
 //        System.out.println(username);
 
+
         // token에 담아서 보냄 dto처럼
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password,null);
 
         // 검증을 위한 authenticationManager로 전달
         return authenticationManager.authenticate(authToken);
@@ -40,12 +41,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     // 로그인 성공시
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
+        System.out.println("success");
     }
 
     // 로그인 실패시
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        super.unsuccessfulAuthentication(request, response, failed);
+        System.out.println("fail");
+
     }
 }

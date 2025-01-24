@@ -8,4 +8,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Boolean existsByUsername(String username);
 
 
+    // DB에서 회원 조회
+    UserEntity findByUsername(String username);
+
+
 }

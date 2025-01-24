@@ -4,6 +4,7 @@ import com.jwt.login.yumi.dto.joinDTO;
 import com.jwt.login.yumi.service.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class JoinController {
         this.joinService = joinService;
     }
 
-    @GetMapping("/join")
+    @PostMapping("/join")
     public String joinProcess(joinDTO joinDTO) {
 
 
