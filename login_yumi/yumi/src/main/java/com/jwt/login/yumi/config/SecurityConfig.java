@@ -2,6 +2,7 @@ package com.jwt.login.yumi.config;
 
 
 import com.jwt.login.yumi.jwt.JWTUtil;
+import com.jwt.login.yumi.jwt.JwtFilter;
 import com.jwt.login.yumi.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,6 +61,11 @@ public class SecurityConfig {
                 .requestMatchers("/login", "/", "/join").permitAll() // 모든 권한 허용
                 .requestMatchers("/admin").hasRole("ADMIN") // admin 사용자만 접근가능
                 .anyRequest().authenticated()); // 다른 사용자는 로그인 한사람만
+
+        // JWTFilter 등록
+        http
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
+
 
         //AuthenticationManager()와 JWTUtil 인수 전달
         http
