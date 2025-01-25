@@ -21,7 +21,7 @@ public class JWTUtil {
 
     // 검증
     public String getUsername(String token) {
-        return Jwts.parser().verifyWith(secretKey).build().parseEncryptedClaims(token).getPayload().get("username", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
     }
 
     public String getRole(String token) {
