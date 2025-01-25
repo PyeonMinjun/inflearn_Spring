@@ -1,6 +1,7 @@
 package com.jwt.login.yumi.config;
 
 
+import com.jwt.login.yumi.jwt.JWTUtil;
 import com.jwt.login.yumi.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +21,12 @@ public class SecurityConfig {
     //AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
     private final AuthenticationConfiguration authenticationConfiguration;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+    private final JWTUtil jwtUtil;
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
 
         this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtUtil = jwtUtil;
     }
 
     //AuthenticationManager Bean 등록
@@ -57,8 +61,9 @@ public class SecurityConfig {
                 .requestMatchers("/admin").hasRole("ADMIN") // admin 사용자만 접근가능
                 .anyRequest().authenticated()); // 다른 사용자는 로그인 한사람만
 
+        //AuthenticationManager()와 JWTUtil 인수 전달
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         // 세션 설정
         http.sessionManagement((session) -> session
