@@ -24,4 +24,8 @@ public class ProductRestController {
         return simpleProductService.findAll();
     }
 
+
+
+
+
 }
