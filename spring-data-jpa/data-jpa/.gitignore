@@ -18,6 +18,8 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+.idea/
+.idea_moduales/
 .idea
 *.iws
 *.iml
@@ -35,3 +37,5 @@ out/
 
 ### VS Code ###
 .vscode/
+
+target/
