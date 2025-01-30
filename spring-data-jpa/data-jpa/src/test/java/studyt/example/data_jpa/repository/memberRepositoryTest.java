@@ -9,6 +9,7 @@ import studyt.example.data_jpa.dto.MemberDto;
 import studyt.example.data_jpa.entity.Member;
 import studyt.example.data_jpa.entity.Team;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +88,23 @@ class memberRepositoryTest {
         for (MemberDto dto : memberDto) {
             System.out.println(dto);
         }
+
+    }
+
+    @Test
+    void findCollection() {
+        Member member1 = new Member("member1");
+        Member member2 = new Member("member2");
+        memberJpaRepository.save(member1);
+        memberJpaRepository.save(member2);
+
+        List<Member> byNames = memberRepository.findByNames(Arrays.asList("AAA", "BBB"));
+        for (Member byName : byNames) {
+            System.out.println(byName);
+        }
+
+
+
 
     }
 
