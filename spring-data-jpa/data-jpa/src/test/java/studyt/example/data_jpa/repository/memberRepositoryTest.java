@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import studyt.example.data_jpa.dto.MemberDto;
 import studyt.example.data_jpa.entity.Member;
+import studyt.example.data_jpa.entity.Team;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,9 @@ class memberRepositoryTest {
 
     @Autowired
     MemberJpaRepository memberJpaRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     @Test
     void memberRepoTest() {
@@ -67,4 +72,22 @@ class memberRepositoryTest {
         long deletedCount = memberJpaRepository.count();
         assertThat(deletedCount).isEqualTo(0);
     }
+
+    @Test
+    void findMemberDto() {
+
+        Team team = new Team("A");
+        teamRepository.save(team);
+
+        Member member = new Member("편민싱");
+        member.setTeam(team);
+        memberRepository.save(member);
+
+        List<MemberDto> memberDto = memberRepository.findMemberDto();
+        for (MemberDto dto : memberDto) {
+            System.out.println(dto);
+        }
+
+    }
+
 }
