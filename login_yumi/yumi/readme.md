@@ -15,7 +15,8 @@
 ### Delegating Filter Proxy
 - 서블릿 컨테이너 (톰캣)에 존재하는 필터 체인에 DelegatingFilter를 등록한 뒤 모든 요청을 가로챈다.
 
-![image-1bdd9a29-5072-4750-a8f1-047557f2de5d.jpg](..%2F..%2F..%2F..%2F..%2F..%2FDownloads%2Fimage-1bdd9a29-5072-4750-a8f1-047557f2de5d.jpg)
+![image2.jpg](static/image2.jpg)
+
 
 - 서블릿 필터 체인의 DelegatingFilter → Security 필터 체인 (내부 처리 후) → 서블릿 필터 체인의 DelegatingFilter
 
