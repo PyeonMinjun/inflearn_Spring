@@ -278,3 +278,6 @@ localStorage.setItem('token', '123');
 
 # CSS, XSS
 - [CSRF, XSS 설명](https://github.com/PyeonMinjun/inflearn_Spring/commit/c18e7c01dda5caea3823743e365fef5082592269)
+
+# 401 status code
+- [401 설명](https://github.com/PyeonMinjun/inflearn_Spring/commit/c98e4975ccddbad6b60476f34a8315b6644c1085)
