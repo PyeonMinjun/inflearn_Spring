@@ -84,6 +84,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/login", "/", "/join").permitAll() // 모든 권한 허용
                 .requestMatchers("/admin").hasRole("ADMIN") // admin 사용자만 접근가능
+                .requestMatchers("/reissue").permitAll() // 액세스 토큰이 만료된 상태에서 리프레쉬 토큰을 접근하기 때문에 접근허용
                 .anyRequest().authenticated()); // 다른 사용자는 로그인 한사람만
 
         // JWTFilter 등록
