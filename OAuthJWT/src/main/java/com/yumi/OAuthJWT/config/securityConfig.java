@@ -1,5 +1,6 @@
 package com.yumi.OAuthJWT.config;
 
+import com.yumi.OAuthJWT.service.CustomOauth2UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class securityConfig {
+
+  private final CustomOauth2UserService customOauth2UserService;
+
+  public securityConfig(CustomOauth2UserService customOauth2UserService) {
+    this.customOauth2UserService = customOauth2UserService;
+  }
 
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -28,7 +35,9 @@ public class securityConfig {
 
     // oauth2 설정
     http
-        .oauth2Login(Customizer.withDefaults());
+        .oauth2Login((oauth2) -> oauth2
+            .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                .userService(customOauth2UserService)));
 
     // 경로별 인가작업
     http
