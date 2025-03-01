@@ -1,5 +1,6 @@
 package com.yumi.OAuthJWT.config;
 
+import com.yumi.OAuthJWT.jwt.JWTFilter;
 import com.yumi.OAuthJWT.jwt.JWTUtil;
 import com.yumi.OAuthJWT.ouath2.CustomSuccessHandler;
 import com.yumi.OAuthJWT.service.CustomOauth2UserService;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -37,6 +39,11 @@ public class securityConfig {
     // HTTP Basic 방식 disable
     http
         .httpBasic((auth) -> auth.disable());
+
+    //JWTFilter 추가
+    http
+        .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
 
     // oauth2 설정
     http

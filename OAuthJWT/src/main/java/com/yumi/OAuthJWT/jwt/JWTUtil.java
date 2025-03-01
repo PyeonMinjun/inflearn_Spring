@@ -22,11 +22,11 @@ public class JWTUtil {
     return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
   }
 
-  private String getRole(String token) {
+  public String getRole(String token) {
     return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
   }
 
-  private Boolean isExpired(String token) {
+  public Boolean isExpired(String token) {
     return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
   }
 
