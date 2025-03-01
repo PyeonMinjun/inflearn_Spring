@@ -6,6 +6,8 @@ import com.yumi.OAuthJWT.dto.GoogleResponse;
 import com.yumi.OAuthJWT.dto.NaverResponse;
 import com.yumi.OAuthJWT.dto.Oath2Response;
 import com.yumi.OAuthJWT.dto.UserDto;
+import com.yumi.OAuthJWT.entitiy.UserEntity;
+import com.yumi.OAuthJWT.repository.UserRepository;
 import org.apache.catalina.User;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -15,6 +17,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomOauth2UserService extends DefaultOAuth2UserService {
+
+  private final UserRepository userRepository;
+
+  public CustomOauth2UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -43,13 +51,39 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     }
 
     // 리소스 서버에서 발급받은 정보로 사용자를 특정할 아이디값을 만듬.
-    UserDto userDto = new UserDto();
 
     String username = oath2Response.getProvider() + " " + oath2Response.getProviderId();
-    userDto.setName(oath2Response.getName());
-    userDto.setUsername(username);
-    userDto.setRole("ROLE_USER");
+    UserEntity existData = userRepository.findByUsername(username);
 
-    return new CustomOAuth2User(userDto);
+    if (existData == null) {
+      UserEntity userEntity = new UserEntity();
+      userEntity.setUsername(username);
+      userEntity.setEmail(oath2Response.getEmail());
+      userEntity.setName(oath2Response.getName());
+      userEntity.setRole("ROLE_USER");
+
+      userRepository.save(userEntity);
+
+      UserDto userDto = new UserDto();
+      userDto.setUsername(username);
+      userDto.setName(oath2Response.getName());
+      userDto.setRole("ROLE_USER");
+
+      return new CustomOAuth2User(userDto);
+
+    }else {
+      existData.setEmail(oath2Response.getEmail());
+      existData.setName(oath2Response.getName());
+      userRepository.save(existData);
+
+      UserDto userDto = new UserDto();
+      userDto.setName(existData.getName());
+      userDto.setUsername(existData.getUsername());
+      userDto.setRole(existData.getRole());
+
+      return new CustomOAuth2User(userDto);
+    }
+
+
   }
 }
