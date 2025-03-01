@@ -1,8 +1,9 @@
 package com.yumi.OAuthJWT.config;
 
+import com.yumi.OAuthJWT.jwt.JWTUtil;
+import com.yumi.OAuthJWT.ouath2.CustomSuccessHandler;
 import com.yumi.OAuthJWT.service.CustomOauth2UserService;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,9 +14,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class securityConfig {
 
   private final CustomOauth2UserService customOauth2UserService;
+  private final CustomSuccessHandler customSuccessHandler;
+  private final JWTUtil jwtUtil;
 
-  public securityConfig(CustomOauth2UserService customOauth2UserService) {
+  public securityConfig(CustomOauth2UserService customOauth2UserService, CustomSuccessHandler customSuccessHandler, CustomSuccessHandler successHandler, JWTUtil jwtUtil) {
     this.customOauth2UserService = customOauth2UserService;
+    this.customSuccessHandler = customSuccessHandler;
+    this.jwtUtil = jwtUtil;
   }
 
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -37,7 +42,9 @@ public class securityConfig {
     http
         .oauth2Login((oauth2) -> oauth2
             .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
-                .userService(customOauth2UserService)));
+                .userService(customOauth2UserService))
+            .successHandler(customSuccessHandler)
+        );
 
     // 경로별 인가작업
     http
@@ -49,6 +56,7 @@ public class securityConfig {
     http
         .sessionManagement((session) -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
 
     return http.build();
   }
