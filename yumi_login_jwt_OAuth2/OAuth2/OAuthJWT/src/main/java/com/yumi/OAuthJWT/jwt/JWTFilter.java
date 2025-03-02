@@ -23,7 +23,11 @@ public class JWTFilter extends OncePerRequestFilter {
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+    String path = request.getRequestURI();
+    if (path.equals("/") || path.equals("/test")) {
+      filterChain.doFilter(request, response);
+      return;
+    }
     // jwt 검증
     // jwtUtil에서 네임이랑 expire 들고오기 ?
     // 그리고 헤더값에서 Authorization 들고와서 null 비교
@@ -32,10 +36,17 @@ public class JWTFilter extends OncePerRequestFilter {
     //cookie들을 불러온 뒤 Authorization Key에 담긴 쿠키를 찾음
     String authorization = null;
     Cookie[] cookies = request.getCookies();
-    for (Cookie cookie : cookies) {
-      if (cookie.getName().equals("Authorization")) {
-        authorization = cookie.getValue();
+
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("Authorization")) {
+          authorization = cookie.getValue();
+        }
       }
+    }else {
+      System.out.println("쿠키가 없어용");
+//      filterChain.doFilter(request,response);
+//      return;
     }
 
     //Authorization 헤더 검증
@@ -75,7 +86,7 @@ public class JWTFilter extends OncePerRequestFilter {
     //세션에 사용자 등록
     SecurityContextHolder.getContext().setAuthentication(authToken);
 
-
+    filterChain.doFilter(request,response);
 
   }
 }
