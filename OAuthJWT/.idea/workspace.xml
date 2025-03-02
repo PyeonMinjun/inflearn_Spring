@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="334bab82-c294-4c0c-8344-f7a6d73879a8" name="변경" comment="feat: CORS 설정" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2tZqfcXsWxc7Y4kRkMfRmX3WrY3" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "5e3820e92af5712379d2a75bb5d44da3",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.yumi.OAuthJWT.dto" />
+      <recent name="com.yumi.OAuthJWT.\" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OAuthJwtApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="GOOGLE_CLIENT_ID" value="380380954184-h8oe784jknhlpgmj9r7hbm05dpfno7fl.pps.googleusercontent.com" />
+        <env name="GOOGLE_CLINET_SECRET" value="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" />
+      </envs>
+      <module name="OAuthJWT.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yumi.OAuthJWT.OAuthJwtApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="334bab82-c294-4c0c-8344-f7a6d73879a8" name="변경" comment="" />
+      <created>1740570049740</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1740570049740</updated>
+      <workItem from="1740570051485" duration="23647000" />
+      <workItem from="1740846942393" duration="5507000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1740570531479</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740570531479</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat : security config 작성">
+      <created>1740573486296</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1740573486296</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat : application.properties 작성">
+      <created>1740573875304</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740573875304</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat : application.properties 작성 - google">
+      <created>1740575152619</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740575152619</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: Google OAuth2 설정을 환경 변수로 변경">
+      <created>1740576637058</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740576637058</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: Google OAuth2 설정을 환경 변수로 변경">
+      <created>1740576809443</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740576809443</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: Google OAuth2 설정을 환경 변수로 변경">
+      <created>1740576947789</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1740576947789</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: OAuth2UserService 응답 받기">
+      <created>1740579468251</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1740579468251</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: OAuth2UserService 완료">
+      <created>1740617771686</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1740617771686</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: 유저정보DB저장">
+      <created>1740834772938</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1740834772938</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: JWT 발급 및 검증 클래스">
+      <created>1740837452165</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1740837452165</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: 로그인 성공 JWT 발급">
+      <created>1740840621316</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740840621316</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: JWT 검증 필터">
+      <created>1740848655973</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740848655973</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: CORS 설정">
+      <created>1740851799656</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1740851799656</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <MESSAGE value="feat : security config 작성" />
+    <MESSAGE value="feat : application.properties 작성" />
+    <MESSAGE value="feat : application.properties 작성 - google" />
+    <MESSAGE value="feat: Google OAuth2 설정을 환경 변수로 변경" />
+    <MESSAGE value="feat: OAuth2UserService 응답 받기" />
+    <MESSAGE value="feat: OAuth2UserService 완료" />
+    <MESSAGE value="feat: 유저정보DB저장" />
+    <MESSAGE value="feat: JWT 발급 및 검증 클래스" />
+    <MESSAGE value="feat: 로그인 성공 JWT 발급" />
+    <MESSAGE value="feat: JWT 검증 필터" />
+    <MESSAGE value="feat: CORS 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: CORS 설정" />
+  </component>
+</project>
