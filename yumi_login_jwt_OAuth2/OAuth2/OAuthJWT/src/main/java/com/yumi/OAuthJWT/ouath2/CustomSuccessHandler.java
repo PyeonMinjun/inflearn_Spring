@@ -9,12 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
   private final JWTUtil jwtUtil;
@@ -29,18 +31,28 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-    //OAuth2User
-    CustomOAuth2User customUserDetails = (CustomOAuth2User) authentication.getPrincipal();
-    String username = customUserDetails.getUsername();
+    try {
+      log.info("onAuthenticationSuccess ====================");
+      //OAuth2User
+      CustomOAuth2User customUserDetails = (CustomOAuth2User) authentication.getPrincipal();
+      String username = customUserDetails.getUsername();
 
-    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-    Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-    GrantedAuthority auth = iterator.next();
-    String role = auth.getAuthority();
-    String token= jwtUtil.createJwt(username, 60 * 60 * 60L, role);
+      Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+      Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
+      GrantedAuthority auth = iterator.next();
+      String role = auth.getAuthority();
+      System.out.println("OAuth2 인증 성공, JWT 토큰 생성 시도");
+      String token = jwtUtil.createJwt(username, 60 * 60 * 60L, role);
+      System.out.println("JWT 토큰 생성 완료");
 
-    response.addCookie(createCookie("Authorization", token));
-    response.sendRedirect("http://localhost:3000/");
+
+      response.addCookie(createCookie("Authorization", token));
+      response.sendRedirect("http://localhost:3000/");
+    } catch (Exception e) {
+      System.err.println("OAuth2 인증 처리 중 오류 발생: " + e.getMessage());
+      e.printStackTrace();
+    }
+
   }
 
   private Cookie createCookie(String key, String value) {
@@ -49,6 +61,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 //    cookie.setSecure(true); // https
     cookie.setPath("/");
     cookie.setHttpOnly(true);
+    log.info("cookie ={}", cookie);
 
     return cookie;
   }

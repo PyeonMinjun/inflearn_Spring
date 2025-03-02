@@ -6,6 +6,7 @@ import com.yumi.OAuthJWT.ouath2.CustomSuccessHandler;
 import com.yumi.OAuthJWT.service.CustomOauth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,18 +18,18 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-public class securityConfig {
+public class SecurityConfig {
 
   private final CustomOauth2UserService customOauth2UserService;
   private final CustomSuccessHandler customSuccessHandler;
   private final JWTUtil jwtUtil;
 
-  public securityConfig(CustomOauth2UserService customOauth2UserService, CustomSuccessHandler customSuccessHandler, CustomSuccessHandler successHandler, JWTUtil jwtUtil) {
+  public SecurityConfig(CustomOauth2UserService customOauth2UserService, CustomSuccessHandler customSuccessHandler, JWTUtil jwtUtil) {
     this.customOauth2UserService = customOauth2UserService;
     this.customSuccessHandler = customSuccessHandler;
     this.jwtUtil = jwtUtil;
   }
-
+  @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     //cors
