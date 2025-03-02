@@ -87,6 +87,7 @@ Access 토큰만 사용하여 요청하기 때문에 Refresh 토큰은 호출 �
 
 
 ### 4. 토큰이 만료된 경우 Refresh 토큰으로 Access 토큰 발급
+[reissue 컨트롤러 작성](https://github.com/PyeonMinjun/inflearn_Spring/commit/8c5e95c233d6123925bc8ed07d09d8849c7e24ca)
 
 Access 토큰이 만료되었다는 요청이 돌아왔을 경우 프론트엔드 로직에 의해 “1”에서 발급 받은 Refresh 토큰을 가지고 서버의 특정 경로(Refresh 토큰을 받는 경로)에 요청을 보내어 Access 토큰을 재발급 받는다.
 
@@ -116,6 +117,9 @@ Access 토큰 요청을 검증하는 JWTFilter에서 Access 토큰이 만료된 
 
 
 # 3. Refresh 토큰이 탈취되는 경우
+
+
+
    단일 → 다중 토큰으로 전환하며 자주 사용되는 Access 토큰이 탈취되더라도 생명주기가 짧아 피해 확률이 줄었다.
 
 하지만 Refresh 토큰 또한 사용되는 빈도만 적을뿐 탈취될 수 있는 확률이 존재한다. 따라서 Refresh 토큰에 대한 보호 방법도 필요하다.
@@ -128,7 +132,7 @@ Access 토큰 요청을 검증하는 JWTFilter에서 Access 토큰이 만료된 
 
 
 ### 2. Refresh 토큰 Rotate
-
+[Refresh rotate](https://github.com/PyeonMinjun/inflearn_Spring/commit/ef193555f624280997cb41237de52288fe8e7265)
 
 
 Access 토큰을 갱신하기 위한 Refresh 토큰 요청 시 서버측에서에서 Refresh 토큰도 재발급을 진행하여 한 번 사용한 Refresh 토큰은 재사용하지 못하도록 한다.
