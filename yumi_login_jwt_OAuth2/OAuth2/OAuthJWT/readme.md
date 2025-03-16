@@ -110,3 +110,8 @@ registration은 외부 서비스에서 우리 서비스를 특정하기 위해 �
 
 (구글, Okta, 페이스북, 깃허브, 등등)
 
+
+
+---
+# cors 및 prefilght 
+[cors 설정 || prefilght 설명](https://github.com/PyeonMinjun/inflearn_Spring/commit/f2aaf8f8c2a7521385e17d3d828174d93ec6eb9d)
