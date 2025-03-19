@@ -12,6 +12,9 @@
 ![image](https://github.com/user-attachments/assets/c918269c-daf3-4b8a-af6e-05aaeada36cb)
 세션 방식에서는 로직을 구성하는데 큰 고민 없이 진행할 수 있다. 로그인이 성공하면 세션을 생성하면 앞으로의 요청에 대해서도 사용자를 알아챌 수 있다.
 
+# 양뱡향 키로 설정시 access 토큰은 헤더에다가 보내면 redirect되어 헤더가 유지되지않는다!
+[헤더 유지 및 프래그먼트 고찰 글](https://blush-winter-59b.notion.site/1bbeac468a2d80b7a759cdd7205b2bb3?pvs=4)
+
 
 
 # JWT 방식에서 OAuth2 클라이언트 구성시 고민점
