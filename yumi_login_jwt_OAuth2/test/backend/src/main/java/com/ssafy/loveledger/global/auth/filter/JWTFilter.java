@@ -2,74 +2,79 @@ package com.ssafy.loveledger.global.auth.filter;
 
 import com.ssafy.loveledger.global.auth.dto.request.CustomOAuth2User;
 import com.ssafy.loveledger.global.auth.dto.request.UserDto;
-import com.ssafy.loveledger.global.util.JWTUtil;
+import com.ssafy.loveledger.global.auth.util.JWTUtil;
+import com.ssafy.loveledger.global.redis.sevice.TokenBlacklistService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
+@Slf4j
 public class JWTFilter extends OncePerRequestFilter {
 
     private final JWTUtil jwtUtil;
-
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getServletPath();
-        return path.startsWith("/oauth2/") || path.startsWith("/login/oauth2/");
-    }
+    private final TokenBlacklistService blacklistService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
         FilterChain filterChain) throws ServletException, IOException {
 
-        // OPTIONS 메서드는 프리플라이트 요청이므로 인증 검사 없이 통과시킴
-        if (request.getMethod().equals("OPTIONS")) {
+        // 프론트에서 `Authorization` 헤더에 accessToken을 넣어 보내야 함.
+        String accessToken = request.getHeader("Authorization");
+
+        if (accessToken == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String authorization = null;
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("Authorization")) {
-                authorization = cookie.getValue();
-            }
-        }
-
-        //Authorization 헤더 검증
-        if (authorization == null) {
-            System.out.println("token null");
-            filterChain.doFilter(request, response);
-
-            //조건이 해당되면 메소드 종료(필수)
+        //블랙리스트 확인 추가
+        if (blacklistService.isBlacklisted(accessToken)) {
+            PrintWriter writer = response.getWriter();
+            writer.println("token is blacklisted");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        // 토큰
-        String token = authorization;
 
-        //토큰 소멸 시간 검증
-        if (jwtUtil.isExpired(token)) {
-            System.out.println("token expired");
-            filterChain.doFilter(request, response);
-            //조건이 해당되면 메소드 종료(필수)
+        try {
+            jwtUtil.isExpired(accessToken);
+        } catch (ExpiredJwtException e) {
+            PrintWriter writer = response.getWriter();
+            writer.println("access token expired");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        //토큰에서 username , role 값 흭득
-        String role = jwtUtil.getRole(token);
-        String username = jwtUtil.getUsername(token);
+
+        String category = jwtUtil.getCategory(accessToken);
+        if (!category.equals("access")) {
+            PrintWriter writer = response.getWriter();
+            writer.println("invalid access token");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        String username = jwtUtil.getUsername(accessToken);
+        Long userId = jwtUtil.getUserId(accessToken);  // JWT에서 userId 추출
+        Long libraryId = jwtUtil.getLibraryId(accessToken);
+        // 로그 추가
+        log.info("JWT 필터에서 추출한 정보 - username: {}, userId: {}, libraryId: {}",
+            username, userId, libraryId);
+        // ----------------------------------------------------------------- //
 
         //userDTO를 생성하여 값 set
         UserDto userDto = UserDto.builder()
-            .role(role)
             .username(username)
+            .userId(userId)
+            .libraryId(libraryId)
             .build();
 
         //UserDetails에 회원 정보 객체 담기
