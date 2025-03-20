@@ -280,6 +280,37 @@ localStorage.setItem('token', '123');
 - 영구 저장 (직접 삭제하기 전까지)
 ```
 
+# HTTP Only
+### HTTP-only 쿠키의 장점
+
+HTTP-only 쿠키는 웹 애플리케이션에서 인증 토큰을 저장하는 가장 안전한 방법 중 하나입니다.
+
+1. 자바스크립트 접근 불가 (XSS 공격 방어)
+가장 중요한 장점은 클라이언트 측 자바스크립트로 쿠키 내용에 접근할 수 없다는 것입니다. 일반 쿠키는 document.cookie로 접근할 수 있지만, HTTP-only 쿠키는 불가능합니다.
+```
+일반 쿠키: 이런 코드로 쿠키 내용 확인 가능
+console.log(document.cookie); // "name=value; otherCookie=otherValue"
+```
+```
+// HTTP-only 쿠키: 자바스크립트로 읽을 수 없음
+console.log(document.cookie); // HTTP-only 쿠키는 보이지 않음
+이는 사이트에 XSS(Cross-Site Scripting) 취약점이 있더라도 공격자가 토큰을 탈취할 수 없게 합니다.
+```
+
+2.자동 전송 메커니즘
+쿠키는 해당 도메인으로의 모든 HTTP 요청에 자동으로 포함됩니다. 이는 개발자가 토큰을 매 요청마다 수동으로 첨부할 필요가 없다는 의미입니다.
+```
+쿠키 사용 시: 추가 코드 필요 없음
+fetch('/api/data');
+
+// localStorage나 프래그먼트 사용 시: 매번 수동으로 추가해야 함
+fetch('/api/data', {
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
+});
+```
+
 # CSS, XSS
 - [CSRF, XSS 설명](https://github.com/PyeonMinjun/inflearn_Spring/commit/c18e7c01dda5caea3823743e365fef5082592269)
 
